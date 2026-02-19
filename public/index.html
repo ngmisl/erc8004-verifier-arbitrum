@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>ERC-8004 Signature Verifier</title>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<style>
+  :root {
+    --bg: #0a0a0a;
+    --surface: #141414;
+    --border: #222;
+    --text: #f5f5f5;
+    --muted: #999;
+    --green: #22c55e;
+    --red: #ef4444;
+    --blue: #3b82f6;
+    --mono: 'JetBrains Mono', 'Fira Code', 'SF Mono', monospace;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: var(--mono);
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem 1rem;
+  }
+  .container {
+    width: 100%;
+    max-width: 640px;
+  }
+  h1 {
+    font-size: 1.1rem;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    color: var(--muted);
+    margin-bottom: 0.25rem;
+  }
+  .subtitle {
+    font-size: 0.75rem;
+    color: var(--muted);
+    margin-bottom: 2rem;
+    opacity: 0.6;
+  }
+  textarea {
+    width: 100%;
+    height: 200px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: var(--text);
+    font-family: var(--mono);
+    font-size: 0.8rem;
+    padding: 1rem;
+    resize: vertical;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  textarea:focus {
+    border-color: var(--blue);
+  }
+  textarea::placeholder {
+    color: var(--muted);
+    opacity: 0.5;
+  }
+  .actions {
+    display: flex;
+    gap: 0.75rem;
+    margin-top: 1rem;
+  }
+  button {
+    font-family: var(--mono);
+    font-size: 0.8rem;
+    padding: 0.6rem 1.5rem;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.15s;
+    background: var(--surface);
+    color: var(--text);
+  }
+  button:hover {
+    border-color: var(--blue);
+    color: #fff;
+  }
+  button.primary {
+    background: var(--blue);
+    border-color: var(--blue);
+    color: #fff;
+  }
+  button.primary:hover {
+    opacity: 0.9;
+  }
+  #result {
+    margin-top: 1.5rem;
+  }
+  .status.verifying {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: var(--muted);
+    font-size: 0.8rem;
+  }
+  .spinner {
+    width: 16px;
+    height: 16px;
+    border: 2px solid var(--border);
+    border-top-color: var(--blue);
+    border-radius: 50%;
+    animation: spin 0.6s linear infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .result-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.25rem;
+  }
+  .result-card.verified { border-color: var(--green); }
+  .result-card.failed { border-color: var(--red); }
+  .result-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+  }
+  .badge {
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    padding: 0.25rem 0.6rem;
+    border-radius: 4px;
+  }
+  .badge.ok {
+    background: rgba(34, 197, 94, 0.15);
+    color: var(--green);
+  }
+  .badge.fail {
+    background: rgba(239, 68, 68, 0.15);
+    color: var(--red);
+  }
+  .agent-name {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #fff;
+  }
+  .subject-line {
+    font-size: 0.8rem;
+    color: var(--text);
+    opacity: 0.85;
+    margin-bottom: 1rem;
+    line-height: 1.4;
+    font-style: italic;
+  }
+  .result-table {
+    width: 100%;
+    font-size: 0.75rem;
+    border-collapse: collapse;
+  }
+  .result-table td {
+    padding: 0.4rem 0;
+    border-top: 1px solid var(--border);
+    vertical-align: top;
+  }
+  .result-table tr:first-child td { border-top: none; }
+  .label {
+    color: var(--muted);
+    width: 140px;
+    white-space: nowrap;
+  }
+  code {
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    color: var(--blue);
+  }
+  a { color: var(--blue); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  .check {
+    font-size: 0.7rem;
+    font-weight: 600;
+  }
+  .check.ok { color: var(--green); }
+  .check.fail { color: var(--red); }
+  .copy-row {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-top: 1rem;
+    padding-top: 0.75rem;
+    border-top: 1px solid var(--border);
+  }
+  .copy-btn {
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    padding: 0.4rem 1rem;
+    background: transparent;
+    border: 1px solid var(--green);
+    color: var(--green);
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .copy-btn:hover {
+    background: rgba(34, 197, 94, 0.1);
+  }
+  #copy-status {
+    font-size: 0.7rem;
+    color: var(--green);
+  }
+  .error-msg {
+    font-size: 0.8rem;
+    color: var(--red);
+    opacity: 0.8;
+    line-height: 1.5;
+  }
+  /* Wizard / How it works */
+  .wizard {
+    margin-top: 2.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border);
+  }
+  .wizard h2 {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--muted);
+    margin-bottom: 1.25rem;
+  }
+  .steps {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .step {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+  .step-num {
+    flex-shrink: 0;
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: rgba(59, 130, 246, 0.12);
+    color: var(--blue);
+    font-size: 0.75rem;
+    font-weight: 600;
+  }
+  .step-content {
+    flex: 1;
+  }
+  .step-title {
+    font-size: 0.8rem;
+    color: var(--text);
+    font-weight: 500;
+    margin-bottom: 0.2rem;
+  }
+  .step-desc {
+    font-size: 0.7rem;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+  .step-example {
+    margin-top: 0.5rem;
+    padding: 0.5rem 0.75rem;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    font-size: 0.65rem;
+    color: var(--muted);
+    line-height: 1.6;
+    white-space: pre-wrap;
+    overflow-x: auto;
+  }
+  .step-num.badge-sig {
+    background: rgba(34, 197, 94, 0.12);
+    color: var(--green);
+  }
+  .step-num.badge-full {
+    background: rgba(59, 130, 246, 0.12);
+    color: var(--blue);
+  }
+  .or-divider {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: var(--muted);
+    font-size: 0.7rem;
+    opacity: 0.5;
+  }
+  .or-divider::before,
+  .or-divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+  .footer {
+    margin-top: 3rem;
+    font-size: 0.65rem;
+    color: var(--muted);
+    opacity: 0.4;
+    text-align: center;
+  }
+  .footer a { color: var(--muted); }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>ERC-8004 Verify</h1>
+  <p class="subtitle">Paste signed content to verify on-chain</p>
+
+  <textarea id="input" placeholder="Paste signed content here...
+
+Example:
+Hello World!
+
+---
+Signed by Keystone (eip155:42161:0x8004...:5)
+sig: 0xf13bd8...
+hash: 0x57caa1..."></textarea>
+
+  <div class="actions">
+    <button id="verify-btn" class="primary">Verify</button>
+  </div>
+
+  <div id="result"></div>
+
+  <div class="wizard" id="how-it-works">
+    <h2>Two ways to verify</h2>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num badge-sig">S</div>
+        <div class="step-content">
+          <div class="step-title">Signature check (verify link)</div>
+          <div class="step-desc">
+            Click a verify link included with signed content.
+            The link carries the signature, hash, agent identity, and a subject line preview
+            encoded in the URL. Verification runs automatically.
+          </div>
+          <div class="step-desc" style="margin-top: 0.4rem;">
+            This confirms the signature was made by a registered on-chain agent.
+            The subject line shows what was signed, but the full content is not included in the link.
+          </div>
+        </div>
+      </div>
+
+      <div class="or-divider">or</div>
+
+      <div class="step">
+        <div class="step-num badge-full">F</div>
+        <div class="step-content">
+          <div class="step-title">Full content check (paste)</div>
+          <div class="step-desc">
+            Paste the entire signed message, including the signature block at the bottom.
+            This lets you see the full content alongside the verification result.
+          </div>
+          <div class="step-example">Your content here...
+
+---
+Signed by AgentName (eip155:42161:0x8004...a432:5)
+sig: 0xf13bd8...
+hash: 0x57caa1...
+ts: 2026-02-06T14:32:15.000Z
+Verify: https://erc8004.orbiter.website/#eyJ...</div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-num">?</div>
+        <div class="step-content">
+          <div class="step-title">What gets checked</div>
+          <div class="step-desc">
+            Both modes perform the same cryptographic check: the signer address is
+            recovered from the ECDSA signature, then matched against the agent's
+            registered wallet on Arbitrum. Everything runs in your browser. No data
+            is sent to any server.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <a href="https://eips.ethereum.org/EIPS/eip-8004" target="_blank">ERC-8004</a>
+    &middot; <a href="/ai.html">For Agents</a>
+    &middot; Verification runs entirely in your browser against Arbitrum
+    <br/>Made with ❤️ by <a href="https://meta.orbiter.website" target="_blank">Chris</a>
+  </div>
+</div>
+
+<script src="/js/main.js"></script>
+</body>
+</html>
