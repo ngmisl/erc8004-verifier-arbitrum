@@ -40,16 +40,16 @@ Plans:
 **Depends on**: Phase 1
 **Requirements**: QA-01, QA-02, VFY-01, VFY-02, VFY-03, VFY-04, VFY-05, VFY-06, VFY-09
 **Success Criteria** (what must be TRUE):
-  1. An agent following the numbered procedure (parse → ecRecover → eth_call × 2 → compare → report) can complete each step using only the information provided in that step's section
+  1. An agent following the numbered procedure (parse → ecRecover → eth_call x 2 → compare → report) can complete each step using only the information provided in that step's section
   2. An agent can copy the `personal_ecRecover` request body verbatim, substitute the hash and sig fields, and receive a valid signer address response
   3. An agent can construct the complete `data` field for `getAgentWallet(uint256)` and `ownerOf(uint256)` calls using the pre-computed selectors and the ABI encoding pattern shown
   4. The `getAgentWallet(uint256)` function selector in the document is the cryptographically correct value (resolved from QA-01)
   5. The RPC endpoint table lists both Arbitrum mainnet (42161) and Sepolia (421614) with their correct chain IDs
-**Plans**: TBD
+**Plans**: 2 plans
 
 Plans:
-- [ ] 02-01: Resolve getAgentWallet selector (QA-01) and verify personal_ecRecover parameter semantics (QA-02), then write VFY-01 and VFY-02
-- [ ] 02-02: Write registry eth_call specs (VFY-03, VFY-04, VFY-05, VFY-06) and RPC endpoint table (VFY-09)
+- [ ] 02-01-PLAN.md -- Write procedure intro, Step 1 (extract fields), and Step 2 (personal_ecRecover spec with template + worked example)
+- [ ] 02-02-PLAN.md -- Write Step 3 (getAgentWallet eth_call), Step 4 (ownerOf eth_call), and RPC Endpoints table
 
 ### Phase 3: Result Logic and Error Handling
 **Goal**: Agents have an unambiguous pass/fail rule with explicit address normalization, three named error conditions with recommended responses, and conceptual trust forwarding guidance
