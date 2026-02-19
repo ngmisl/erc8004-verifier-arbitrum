@@ -132,7 +132,71 @@ Output includes all fields (required and optional). The tool produces the comple
 
 ## Verification Procedure
 
-<!-- Phase 2 -->
+The following steps produce three addresses: a recovered signer address from the signature, an agent wallet address from the registry, and an NFT owner address from the registry. All calls are JSON-RPC over HTTP POST to an Arbitrum RPC endpoint with `Content-Type: application/json`. Steps 2, 3, and 4 are independent and may run concurrently.
+
+### Step 1: Extract Fields
+
+From the signed block (see Signed Block Format above), extract the `hash:` field value and the `sig:` field value. From the agent identity string in the `Signed by` line (see Agent Identity above), extract the `chainId`, `registryAddress`, and `agentId` components.
+
+You now have five values: `hash`, `sig`, `chainId`, `registryAddress`, `agentId`.
+
+### Step 2: Recover Signer (personal_ecRecover)
+
+Call `personal_ecRecover` to recover the address that produced the signature. Pass the `hash:` field value directly as `params[0]`. Pass the `sig:` field value directly as `params[1]`. The RPC node applies the EIP-191 prefix internally.
+
+**Template:**
+
+```json
+{
+  "jsonrpc": "2.0",
+  "id": 1,
+  "method": "personal_ecRecover",
+  "params": [
+    "<hash: field value>",
+    "<sig: field value>"
+  ]
+}
+```
+
+**Response template:**
+
+```json
+{
+  "jsonrpc": "2.0",
+  "id": 1,
+  "result": "<recovered signer address>"
+}
+```
+
+**Worked example** (using the synthetic values from the Example: Required Fields Only above):
+
+```json
+{
+  "jsonrpc": "2.0",
+  "id": 1,
+  "method": "personal_ecRecover",
+  "params": [
+    "0x57caa12b4f8c3d9e2a1b7f4c6e8d0a3b5f7c9e1d3a5b7c9e1f3a5b7c9e1f3a5",
+    "0xf13bd8a9c7e4d2f0b1a5c8e3f7b2d9a6e4c1f8b0d3a2e5f7c9b4d6e8a1f3c2e5d7b9a0c3f6e8b1d4a2e5c7f9b0d3a6"
+  ]
+}
+```
+
+**Response:**
+
+```json
+{
+  "jsonrpc": "2.0",
+  "id": 1,
+  "result": "0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045"
+}
+```
+
+> These values are synthetic. Do not use for on-chain verification.
+
+The `result` field is the recovered signer address. Save this for comparison in the Result step.
+
+<!-- Phase 2 continued -->
 
 ## Result
 
