@@ -40,10 +40,10 @@
 
 ### Build Pipeline
 
-- [ ] **BUILD-01**: Replace ai.html with ERC8004-SKILL.md in public/ directory
-- [ ] **BUILD-02**: Update dist script in package.json to copy ERC8004-SKILL.md instead of ai.html
-- [ ] **BUILD-03**: Add "For Agents" box to index.html with fetch URL for the skill doc
-- [ ] **BUILD-04**: Remove ai.html from the project
+- [x] **BUILD-01**: Replace ai.html with ERC8004-SKILL.md in public/ directory
+- [x] **BUILD-02**: Update dist script in package.json to copy ERC8004-SKILL.md instead of ai.html
+- [x] **BUILD-03**: Add "For Agents" box to index.html with fetch URL for the skill doc
+- [x] **BUILD-04**: Remove ai.html from the project
 
 ### Verification
 
@@ -101,10 +101,10 @@
 | VFY-08 | Phase 3 | Complete |
 | VFY-10 | Phase 3 | Complete |
 | TRUST-01 | Phase 3 | Complete |
-| BUILD-01 | Phase 4 | Pending |
-| BUILD-02 | Phase 4 | Pending |
-| BUILD-03 | Phase 4 | Pending |
-| BUILD-04 | Phase 4 | Pending |
+| BUILD-01 | Phase 4 | Complete |
+| BUILD-02 | Phase 4 | Complete |
+| BUILD-03 | Phase 4 | Complete |
+| BUILD-04 | Phase 4 | Complete |
 
 **Coverage:**
 - v1 requirements: 24 total
