@@ -4,7 +4,7 @@
   "scripts": {
     "dev": "bunx shadow-cljs watch app",
     "build": "bunx shadow-cljs release app && bun run dist",
-    "dist": "rm -rf dist && mkdir -p dist/js && cp public/index.html public/ai.html public/favicon.svg dist/ && cp public/js/main.js dist/js/",
+    "dist": "rm -rf dist && mkdir -p dist/js && cp public/index.html public/ERC8004-SKILL.md public/favicon.svg dist/ && cp public/js/main.js dist/js/",
     "serve": "bunx serve dist"
   },
   "dependencies": {
