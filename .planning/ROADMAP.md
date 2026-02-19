@@ -74,10 +74,10 @@ Plans:
   2. The index.html "For Agents" box is visible and contains a working fetch URL for the skill doc
   3. ai.html no longer exists in the project (public/ and dist/)
   4. An agent fetching the skill doc URL receives the markdown content, not an HTML wrapper
-**Plans**: TBD
+**Plans**: 1 plan
 
 Plans:
-- [ ] 04-01: Update build pipeline (BUILD-01, BUILD-02), remove ai.html (BUILD-04), add "For Agents" box to index.html (BUILD-03)
+- [ ] 04-01-PLAN.md -- Update dist script (BUILD-02), add "For Agents" box to index.html (BUILD-03), delete ai.html (BUILD-01, BUILD-04)
 
 ## Progress
 
