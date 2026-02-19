@@ -70,7 +70,7 @@ Each task was committed atomically:
 
 1. **Task 1: Create ERC8004-SKILL.md with capability declaration, scope, and heading skeleton** - `16c814b` (feat)
 
-**Plan metadata:** _(pending — docs commit follows)_
+**Plan metadata:** `02c77c1` (docs: complete document skeleton plan)
 
 ## Files Created/Modified
 - `public/ERC8004-SKILL.md` - Document skeleton: H1 title, ## Capability, ## Scope, 9 H2 headings, 9 H3 sub-headings, phase placeholder comments
