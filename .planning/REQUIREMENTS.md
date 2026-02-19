@@ -81,36 +81,36 @@
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| SKILL-01 | — | Pending |
-| SKILL-02 | — | Pending |
-| SKILL-03 | — | Pending |
-| FMT-01 | — | Pending |
-| FMT-02 | — | Pending |
-| FMT-03 | — | Pending |
-| SIGN-01 | — | Pending |
-| VFY-01 | — | Pending |
-| VFY-02 | — | Pending |
-| VFY-03 | — | Pending |
-| VFY-04 | — | Pending |
-| VFY-05 | — | Pending |
-| VFY-06 | — | Pending |
-| VFY-07 | — | Pending |
-| VFY-08 | — | Pending |
-| VFY-09 | — | Pending |
-| VFY-10 | — | Pending |
-| TRUST-01 | — | Pending |
-| BUILD-01 | — | Pending |
-| BUILD-02 | — | Pending |
-| BUILD-03 | — | Pending |
-| BUILD-04 | — | Pending |
-| QA-01 | — | Pending |
-| QA-02 | — | Pending |
+| SKILL-01 | Phase 1 | Pending |
+| SKILL-02 | Phase 1 | Pending |
+| SKILL-03 | Phase 1 | Pending |
+| FMT-01 | Phase 1 | Pending |
+| FMT-02 | Phase 1 | Pending |
+| FMT-03 | Phase 1 | Pending |
+| SIGN-01 | Phase 1 | Pending |
+| QA-01 | Phase 2 | Pending |
+| QA-02 | Phase 2 | Pending |
+| VFY-01 | Phase 2 | Pending |
+| VFY-02 | Phase 2 | Pending |
+| VFY-03 | Phase 2 | Pending |
+| VFY-04 | Phase 2 | Pending |
+| VFY-05 | Phase 2 | Pending |
+| VFY-06 | Phase 2 | Pending |
+| VFY-09 | Phase 2 | Pending |
+| VFY-07 | Phase 3 | Pending |
+| VFY-08 | Phase 3 | Pending |
+| VFY-10 | Phase 3 | Pending |
+| TRUST-01 | Phase 3 | Pending |
+| BUILD-01 | Phase 4 | Pending |
+| BUILD-02 | Phase 4 | Pending |
+| BUILD-03 | Phase 4 | Pending |
+| BUILD-04 | Phase 4 | Pending |
 
 **Coverage:**
 - v1 requirements: 24 total
-- Mapped to phases: 0
-- Unmapped: 24
+- Mapped to phases: 24
+- Unmapped: 0
 
 ---
 *Requirements defined: 2026-02-19*
-*Last updated: 2026-02-19 after initial definition*
+*Last updated: 2026-02-19 after roadmap creation*
