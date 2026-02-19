@@ -5,22 +5,22 @@
 See: .planning/PROJECT.md (updated 2026-02-19)
 
 **Core value:** AI agents can verify ERC-8004 signed messages from other agents using only web fetch — no libraries, no special tools
-**Current focus:** Phase 1 — Skill Doc Foundation
+**Current focus:** Phase 2 — Verification Procedure
 
 ## Current Position
 
-Phase: 1 of 4 (Skill Doc Foundation)
-Plan: 2 of 2 in current phase
-Status: Phase 1 complete
-Last activity: 2026-02-19 — Completed plan 01-02 (Phase 1 content: format spec, identity, signing instructions)
+Phase: 2 of 4 (Verification Procedure)
+Plan: 1 of 2 in current phase
+Status: Phase 2 in progress
+Last activity: 2026-02-19 — Completed plan 02-01 (Verification Procedure intro, Step 1 extract fields, Step 2 personal_ecRecover)
 
-Progress: [██░░░░░░░░] 25%
+Progress: [███░░░░░░░] 37%
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 2
-- Average duration: 1.5 min
+- Total plans completed: 3
+- Average duration: 1.3 min
 - Total execution time: ~0 hours
 
 **By Phase:**
@@ -28,10 +28,11 @@ Progress: [██░░░░░░░░] 25%
 | Phase | Plans | Total | Avg/Plan |
 |-------|-------|-------|----------|
 | 01-skill-doc-foundation | 2 | 3 min | 1.5 min |
+| 02-verification-procedure | 1 | 1 min | 1 min |
 
 **Recent Trend:**
-- Last 5 plans: 01-01 (1 min), 01-02 (2 min)
-- Trend: establishing baseline
+- Last 5 plans: 01-01 (1 min), 01-02 (2 min), 02-01 (1 min)
+- Trend: consistent 1-2 min per plan
 
 *Updated after each plan completion*
 
@@ -51,6 +52,9 @@ Recent decisions affecting current work:
 - [01-02]: Show-then-explain annotation style — code block first, then per-line bullet list below (no inline comments)
 - [01-02]: Hash field description includes both what it is AND what not to do (do not recompute from content) — prevents double-prefix failure
 - [01-02]: Synthetic data disclaimer styled as Markdown blockquote for visual distinction from spec content
+- [02-01]: personal_ecRecover params order [hash, sig] — hash verbatim as params[0], sig verbatim as params[1], RPC node applies EIP-191 prefix internally (QA-02 resolved)
+- [02-01]: JSON body only for JSON-RPC examples — POST URL and Content-Type stated once in procedure intro, not repeated per step
+- [02-01]: Template-then-worked-example pattern for Step 2 — <placeholder> template first, then concrete worked example with synthetic values
 
 ### Pending Todos
 
@@ -58,11 +62,11 @@ None yet.
 
 ### Blockers/Concerns
 
-- [Phase 2]: getAgentWallet(uint256) function selector is inconsistent across research files (three different values: 0x45a3a8d5, 0x3cef5e0f, 0x9a5b0c6b). Must be resolved via keccak256("getAgentWallet(uint256)") before writing Phase 2. QA-01 covers this.
+- [Phase 2]: QA-01 RESOLVED in research — getAgentWallet(uint256) selector is 0x00339509 (computed via viem getFunctionSelector). Will be written into document in Plan 02-02.
 - [Phase 4]: Hosting URL conflict — PROJECT.md says http://erc8004.qstorage.quilibrium.com/ERC8004-SKILL.md, STACK.md says https://erc8004.orbiter.website/ERC8004-SKILL.md. Must confirm correct URL before writing the "For Agents" box.
 
 ## Session Continuity
 
 Last session: 2026-02-19
-Stopped at: Completed 01-02-PLAN.md (Phase 1 content — format spec, agent identity, signing instructions)
-Resume file: .planning/phases/02-verification-procedure/ (Phase 2 pending — resolve QA-01 blocker first)
+Stopped at: Completed 02-01-PLAN.md (Verification Procedure intro, Step 1 extract fields, Step 2 personal_ecRecover)
+Resume file: .planning/phases/02-verification-procedure/02-02-PLAN.md (Steps 3-4 and RPC Endpoints)

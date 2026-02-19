@@ -23,8 +23,8 @@
 
 ### Verification Procedure
 
-- [ ] **VFY-01**: Numbered step-by-step verification walkthrough (parse → ecRecover → eth_call → compare → report)
-- [ ] **VFY-02**: `personal_ecRecover` JSON-RPC call spec — exact request body, params array order, response shape
+- [x] **VFY-01**: Numbered step-by-step verification walkthrough (parse → ecRecover → eth_call → compare → report)
+- [x] **VFY-02**: `personal_ecRecover` JSON-RPC call spec — exact request body, params array order, response shape
 - [ ] **VFY-03**: `eth_call` spec for `getAgentWallet(uint256)` — pre-computed function selector, ABI-encoded argument, response decoding
 - [ ] **VFY-04**: `eth_call` spec for `ownerOf(uint256)` — pre-computed function selector (`0x6352211e`), same encoding pattern
 - [ ] **VFY-05**: Pre-computed ABI call data examples — worked example with a real agentId showing full `data` field construction
@@ -47,8 +47,8 @@
 
 ### Verification
 
-- [ ] **QA-01**: Compute correct `getAgentWallet(uint256)` function selector from canonical ABI (resolve research inconsistency)
-- [ ] **QA-02**: Verify `personal_ecRecover` parameter semantics match existing chain.cljs behavior
+- [x] **QA-01**: Compute correct `getAgentWallet(uint256)` function selector from canonical ABI (resolve research inconsistency)
+- [x] **QA-02**: Verify `personal_ecRecover` parameter semantics match existing chain.cljs behavior
 
 ## v2 Requirements
 
@@ -88,10 +88,10 @@
 | FMT-02 | Phase 1 | Complete |
 | FMT-03 | Phase 1 | Complete |
 | SIGN-01 | Phase 1 | Complete |
-| QA-01 | Phase 2 | Pending |
-| QA-02 | Phase 2 | Pending |
-| VFY-01 | Phase 2 | Pending |
-| VFY-02 | Phase 2 | Pending |
+| QA-01 | Phase 2 | Complete |
+| QA-02 | Phase 2 | Complete |
+| VFY-01 | Phase 2 | Complete |
+| VFY-02 | Phase 2 | Complete |
 | VFY-03 | Phase 2 | Pending |
 | VFY-04 | Phase 2 | Pending |
 | VFY-05 | Phase 2 | Pending |
