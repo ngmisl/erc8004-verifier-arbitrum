@@ -29,11 +29,11 @@ Decimal phases appear between their surrounding integers in numeric order.
   3. An agent knows what the document does NOT cover (keccak256, registry deployment, wallet management) without having to infer it
   4. An agent can parse any signed block by following the format spec — separator, every field, required vs optional, annotated real example
   5. An agent knows the full `eip155:<chainId>:<registryAddress>:<agentId>` identity format broken down field by field
-**Plans**: TBD
+**Plans**: 2 plans
 
 Plans:
-- [ ] 01-01: Create ERC8004-SKILL.md with document structure, capability declaration, scope statement, and heading skeleton
-- [ ] 01-02: Write signed block format spec (FMT-01, FMT-02, FMT-03) and signing instructions section (SIGN-01)
+- [ ] 01-01-PLAN.md -- Create ERC8004-SKILL.md with document structure, capability declaration, scope statement, and heading skeleton
+- [ ] 01-02-PLAN.md -- Write signed block format spec (FMT-01, FMT-02, FMT-03) and signing instructions section (SIGN-01)
 
 ### Phase 2: Verification Procedure
 **Goal**: Agents have a complete, step-by-step numbered verification procedure with verbatim JSON-RPC request/response pairs, pre-computed function selectors, ABI encoding examples, and a confirmed-correct getAgentWallet selector
