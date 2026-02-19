@@ -29,14 +29,14 @@
 - [x] **VFY-04**: `eth_call` spec for `ownerOf(uint256)` — pre-computed function selector (`0x6352211e`), same encoding pattern
 - [x] **VFY-05**: Pre-computed ABI call data examples — worked example with a real agentId showing full `data` field construction
 - [x] **VFY-06**: JSON-RPC request/response pairs shown together for each call
-- [ ] **VFY-07**: Address comparison rule — case-insensitive hex comparison, explicit lowercase normalization
-- [ ] **VFY-08**: Pass/fail definition — verified if recovered signer matches either getAgentWallet OR ownerOf result
+- [x] **VFY-07**: Address comparison rule — case-insensitive hex comparison, explicit lowercase normalization
+- [x] **VFY-08**: Pass/fail definition — verified if recovered signer matches either getAgentWallet OR ownerOf result
 - [x] **VFY-09**: RPC endpoint list — Arbitrum mainnet and Sepolia with chain IDs
-- [ ] **VFY-10**: Three named error conditions with recommended agent response (network error, address mismatch, unregistered agent)
+- [x] **VFY-10**: Three named error conditions with recommended agent response (network error, address mismatch, unregistered agent)
 
 ### Trust Forwarding
 
-- [ ] **TRUST-01**: Conceptual trust forwarding guidance — one paragraph explaining how agents can relay verification results without prescribing a format
+- [x] **TRUST-01**: Conceptual trust forwarding guidance — one paragraph explaining how agents can relay verification results without prescribing a format
 
 ### Build Pipeline
 
@@ -97,10 +97,10 @@
 | VFY-05 | Phase 2 | Complete |
 | VFY-06 | Phase 2 | Complete |
 | VFY-09 | Phase 2 | Complete |
-| VFY-07 | Phase 3 | Pending |
-| VFY-08 | Phase 3 | Pending |
-| VFY-10 | Phase 3 | Pending |
-| TRUST-01 | Phase 3 | Pending |
+| VFY-07 | Phase 3 | Complete |
+| VFY-08 | Phase 3 | Complete |
+| VFY-10 | Phase 3 | Complete |
+| TRUST-01 | Phase 3 | Complete |
 | BUILD-01 | Phase 4 | Pending |
 | BUILD-02 | Phase 4 | Pending |
 | BUILD-03 | Phase 4 | Pending |

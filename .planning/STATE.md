@@ -5,16 +5,16 @@
 See: .planning/PROJECT.md (updated 2026-02-19)
 
 **Core value:** AI agents can verify ERC-8004 signed messages from other agents using only web fetch — no libraries, no special tools
-**Current focus:** Phase 2 — Verification Procedure
+**Current focus:** Phase 3 — Result Logic and Error Handling
 
 ## Current Position
 
-Phase: 2 of 4 (Verification Procedure)
-Plan: 2 of 2 in current phase — Phase 2 complete
-Status: Phase 2 complete
-Last activity: 2026-02-19 — Completed plan 02-02 (Steps 3-4 eth_call specs, RPC Endpoints table — Verification Procedure complete)
+Phase: 3 of 4 (Result Logic and Error Handling)
+Plan: 1 of 1 in current phase — Phase 3 complete
+Status: Phase 3 complete
+Last activity: 2026-02-19 — Completed plan 03-01 (Result comparison rule, Error Conditions table, Trust Forwarding — Phase 3 complete)
 
-Progress: [█████░░░░░] 50%
+Progress: [███████░░░] 62%
 
 ## Performance Metrics
 
@@ -29,9 +29,10 @@ Progress: [█████░░░░░] 50%
 |-------|-------|-------|----------|
 | 01-skill-doc-foundation | 2 | 3 min | 1.5 min |
 | 02-verification-procedure | 2 | 2 min | 1 min |
+| 03-result-logic-and-error-handling | 1 | 1 min | 1 min |
 
 **Recent Trend:**
-- Last 5 plans: 01-01 (1 min), 01-02 (2 min), 02-01 (1 min), 02-02 (1 min)
+- Last 5 plans: 01-01 (1 min), 01-02 (2 min), 02-01 (1 min), 02-02 (1 min), 03-01 (1 min)
 - Trend: consistent 1-2 min per plan
 
 *Updated after each plan completion*
@@ -58,6 +59,9 @@ Recent decisions affecting current work:
 - [02-02]: Full-independent-template per eth_call function — each function (getAgentWallet, ownerOf) has its own complete template and worked example, not DRYed, for copy-paste agent use
 - [02-02]: ABI encoding rule stated once before Step 3 (applies to both Steps 3 and 4)
 - [02-02]: Intentional-duplication note on RPC Endpoints table — duplicate of Supported Chains from Agent Identity, intentional so agents don't need to scroll back
+- [03-01]: No H3 subsections in Result, Error Conditions, or Trust Forwarding — these are conclusion sections, not procedural steps
+- [03-01]: Error conditions: three named conditions with distinct recommended responses (network error vs. address mismatch vs. unregistered agent are never conflated)
+- [03-01]: Trust forwarding: one conceptual paragraph, no prescribed field names, data structures, or transport protocol
 
 ### Pending Todos
 
@@ -70,5 +74,5 @@ None yet.
 ## Session Continuity
 
 Last session: 2026-02-19
-Stopped at: Completed 02-02-PLAN.md (Steps 3-4 eth_call specs, RPC Endpoints — Phase 2 Verification Procedure complete)
-Resume file: Phase 3 — Result, Error Conditions, Trust Forwarding
+Stopped at: Completed 03-01-PLAN.md (Result comparison rule, Error Conditions table, Trust Forwarding — Phase 3 complete)
+Resume file: Phase 4 — For Agents box / hosting entry point
