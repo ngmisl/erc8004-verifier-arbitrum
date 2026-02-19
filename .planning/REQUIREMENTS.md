@@ -25,13 +25,13 @@
 
 - [x] **VFY-01**: Numbered step-by-step verification walkthrough (parse → ecRecover → eth_call → compare → report)
 - [x] **VFY-02**: `personal_ecRecover` JSON-RPC call spec — exact request body, params array order, response shape
-- [ ] **VFY-03**: `eth_call` spec for `getAgentWallet(uint256)` — pre-computed function selector, ABI-encoded argument, response decoding
-- [ ] **VFY-04**: `eth_call` spec for `ownerOf(uint256)` — pre-computed function selector (`0x6352211e`), same encoding pattern
-- [ ] **VFY-05**: Pre-computed ABI call data examples — worked example with a real agentId showing full `data` field construction
-- [ ] **VFY-06**: JSON-RPC request/response pairs shown together for each call
+- [x] **VFY-03**: `eth_call` spec for `getAgentWallet(uint256)` — pre-computed function selector, ABI-encoded argument, response decoding
+- [x] **VFY-04**: `eth_call` spec for `ownerOf(uint256)` — pre-computed function selector (`0x6352211e`), same encoding pattern
+- [x] **VFY-05**: Pre-computed ABI call data examples — worked example with a real agentId showing full `data` field construction
+- [x] **VFY-06**: JSON-RPC request/response pairs shown together for each call
 - [ ] **VFY-07**: Address comparison rule — case-insensitive hex comparison, explicit lowercase normalization
 - [ ] **VFY-08**: Pass/fail definition — verified if recovered signer matches either getAgentWallet OR ownerOf result
-- [ ] **VFY-09**: RPC endpoint list — Arbitrum mainnet and Sepolia with chain IDs
+- [x] **VFY-09**: RPC endpoint list — Arbitrum mainnet and Sepolia with chain IDs
 - [ ] **VFY-10**: Three named error conditions with recommended agent response (network error, address mismatch, unregistered agent)
 
 ### Trust Forwarding
@@ -92,11 +92,11 @@
 | QA-02 | Phase 2 | Complete |
 | VFY-01 | Phase 2 | Complete |
 | VFY-02 | Phase 2 | Complete |
-| VFY-03 | Phase 2 | Pending |
-| VFY-04 | Phase 2 | Pending |
-| VFY-05 | Phase 2 | Pending |
-| VFY-06 | Phase 2 | Pending |
-| VFY-09 | Phase 2 | Pending |
+| VFY-03 | Phase 2 | Complete |
+| VFY-04 | Phase 2 | Complete |
+| VFY-05 | Phase 2 | Complete |
+| VFY-06 | Phase 2 | Complete |
+| VFY-09 | Phase 2 | Complete |
 | VFY-07 | Phase 3 | Pending |
 | VFY-08 | Phase 3 | Pending |
 | VFY-10 | Phase 3 | Pending |

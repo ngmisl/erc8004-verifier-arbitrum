@@ -10,16 +10,16 @@ See: .planning/PROJECT.md (updated 2026-02-19)
 ## Current Position
 
 Phase: 2 of 4 (Verification Procedure)
-Plan: 1 of 2 in current phase
-Status: Phase 2 in progress
-Last activity: 2026-02-19 — Completed plan 02-01 (Verification Procedure intro, Step 1 extract fields, Step 2 personal_ecRecover)
+Plan: 2 of 2 in current phase — Phase 2 complete
+Status: Phase 2 complete
+Last activity: 2026-02-19 — Completed plan 02-02 (Steps 3-4 eth_call specs, RPC Endpoints table — Verification Procedure complete)
 
-Progress: [███░░░░░░░] 37%
+Progress: [█████░░░░░] 50%
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 3
+- Total plans completed: 4
 - Average duration: 1.3 min
 - Total execution time: ~0 hours
 
@@ -28,10 +28,10 @@ Progress: [███░░░░░░░] 37%
 | Phase | Plans | Total | Avg/Plan |
 |-------|-------|-------|----------|
 | 01-skill-doc-foundation | 2 | 3 min | 1.5 min |
-| 02-verification-procedure | 1 | 1 min | 1 min |
+| 02-verification-procedure | 2 | 2 min | 1 min |
 
 **Recent Trend:**
-- Last 5 plans: 01-01 (1 min), 01-02 (2 min), 02-01 (1 min)
+- Last 5 plans: 01-01 (1 min), 01-02 (2 min), 02-01 (1 min), 02-02 (1 min)
 - Trend: consistent 1-2 min per plan
 
 *Updated after each plan completion*
@@ -55,6 +55,9 @@ Recent decisions affecting current work:
 - [02-01]: personal_ecRecover params order [hash, sig] — hash verbatim as params[0], sig verbatim as params[1], RPC node applies EIP-191 prefix internally (QA-02 resolved)
 - [02-01]: JSON body only for JSON-RPC examples — POST URL and Content-Type stated once in procedure intro, not repeated per step
 - [02-01]: Template-then-worked-example pattern for Step 2 — <placeholder> template first, then concrete worked example with synthetic values
+- [02-02]: Full-independent-template per eth_call function — each function (getAgentWallet, ownerOf) has its own complete template and worked example, not DRYed, for copy-paste agent use
+- [02-02]: ABI encoding rule stated once before Step 3 (applies to both Steps 3 and 4)
+- [02-02]: Intentional-duplication note on RPC Endpoints table — duplicate of Supported Chains from Agent Identity, intentional so agents don't need to scroll back
 
 ### Pending Todos
 
@@ -62,11 +65,10 @@ None yet.
 
 ### Blockers/Concerns
 
-- [Phase 2]: QA-01 RESOLVED in research — getAgentWallet(uint256) selector is 0x00339509 (computed via viem getFunctionSelector). Will be written into document in Plan 02-02.
 - [Phase 4]: Hosting URL conflict — PROJECT.md says http://erc8004.qstorage.quilibrium.com/ERC8004-SKILL.md, STACK.md says https://erc8004.orbiter.website/ERC8004-SKILL.md. Must confirm correct URL before writing the "For Agents" box.
 
 ## Session Continuity
 
 Last session: 2026-02-19
-Stopped at: Completed 02-01-PLAN.md (Verification Procedure intro, Step 1 extract fields, Step 2 personal_ecRecover)
-Resume file: .planning/phases/02-verification-procedure/02-02-PLAN.md (Steps 3-4 and RPC Endpoints)
+Stopped at: Completed 02-02-PLAN.md (Steps 3-4 eth_call specs, RPC Endpoints — Phase 2 Verification Procedure complete)
+Resume file: Phase 3 — Result, Error Conditions, Trust Forwarding
