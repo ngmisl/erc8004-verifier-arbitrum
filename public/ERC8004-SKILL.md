@@ -140,9 +140,38 @@ From the signed block (see Signed Block Format above), extract the `hash:` field
 
 You now have five values: `hash`, `sig`, `chainId`, `registryAddress`, `agentId`.
 
-### Step 2: Recover Signer (personal_ecRecover)
+### Step 2: Recover Signer (eth_call)
 
-Call `personal_ecRecover` to recover the address that produced the signature. Pass the `hash:` field value directly as `params[0]`. Pass the `sig:` field value directly as `params[1]`. The RPC node applies the EIP-191 prefix internally.
+Call `eth_call` with inline bytecode to recover the address that produced the signature. The bytecode applies the EIP-191 message prefix and calls the EVM ecrecover precompile internally. No deployed contract is needed — the bytecode executes as a one-off computation.
+
+**Splitting the signature:**
+
+The `sig:` field is 65 bytes (130 hex characters after `0x`). Split it into three components by character position (zero-indexed from the `0x` prefix):
+
+| Component | Characters | Size |
+|-----------|-----------|------|
+| `r` | sig[2..66] | 32 bytes (64 hex chars) |
+| `s` | sig[66..130] | 32 bytes (64 hex chars) |
+| `v` | sig[130..132] | 1 byte (2 hex chars) |
+
+**Fixed recovery bytecode:**
+
+```
+608060405234801561001057600080fd5b5060405161012b38038061012b83398101604081905261002f916100e6565b6040517f19457468657265756d205369676e6564204d6573736167653a0a3332000000006020820152603c8101859052600090605c0160408051601f198184030181528282528051602091820120600080855291840180845281905260ff88169284019290925260608301869052608083018590529092509060019060a0016020604051602081039080840390855afa1580156100d0573d6000803e3d6000fd5b5050506020604051035190508060005260206000f35b600080600080608085870312156100fc57600080fd5b84519350602085015160ff8116811461011457600080fd5b604086015160609096015194979096509250505056fe
+```
+
+This bytecode is the same for every verification.
+
+**Constructing the `data` field:**
+
+Concatenate these parts into a single hex string with no spaces:
+
+1. `0x`
+2. The fixed bytecode above
+3. `hash:` field value without `0x` prefix (64 hex chars)
+4. `v` left-padded with zeros to 64 hex chars
+5. `r` (64 hex chars)
+6. `s` (64 hex chars)
 
 **Template:**
 
@@ -150,10 +179,12 @@ Call `personal_ecRecover` to recover the address that produced the signature. Pa
 {
   "jsonrpc": "2.0",
   "id": 1,
-  "method": "personal_ecRecover",
+  "method": "eth_call",
   "params": [
-    "<hash: field value>",
-    "<sig: field value>"
+    {
+      "data": "0x608060405234801561001057600080fd5b5060405161012b38038061012b83398101604081905261002f916100e6565b6040517f19457468657265756d205369676e6564204d6573736167653a0a3332000000006020820152603c8101859052600090605c0160408051601f198184030181528282528051602091820120600080855291840180845281905260ff88169284019290925260608301869052608083018590529092509060019060a0016020604051602081039080840390855afa1580156100d0573d6000803e3d6000fd5b5050506020604051035190508060005260206000f35b600080600080608085870312156100fc57600080fd5b84519350602085015160ff8116811461011457600080fd5b604086015160609096015194979096509250505056fe<hash><v-padded><r><s>"
+    },
+    "latest"
   ]
 }
 ```
@@ -164,39 +195,13 @@ Call `personal_ecRecover` to recover the address that produced the signature. Pa
 {
   "jsonrpc": "2.0",
   "id": 1,
-  "result": "<recovered signer address>"
+  "result": "<recovered signer address, left-padded to 32 bytes>"
 }
 ```
 
-**Worked example** (using the synthetic values from the Example: Required Fields Only above):
+The result is the recovered signer address left-padded with zeros to 32 bytes (same format as Steps 3 and 4). Save this for comparison in the Result step.
 
-```json
-{
-  "jsonrpc": "2.0",
-  "id": 1,
-  "method": "personal_ecRecover",
-  "params": [
-    "0x57caa12b4f8c3d9e2a1b7f4c6e8d0a3b5f7c9e1d3a5b7c9e1f3a5b7c9e1f3a5",
-    "0xf13bd8a9c7e4d2f0b1a5c8e3f7b2d9a6e4c1f8b0d3a2e5f7c9b4d6e8a1f3c2e5d7b9a0c3f6e8b1d4a2e5c7f9b0d3a6"
-  ]
-}
-```
-
-**Response:**
-
-```json
-{
-  "jsonrpc": "2.0",
-  "id": 1,
-  "result": "0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045"
-}
-```
-
-> These values are synthetic. Do not use for on-chain verification.
-
-The `result` field is the recovered signer address. Save this for comparison in the Result step.
-
-**ABI encoding:** Call data = `0x` + function selector (8 hex chars) + agentId zero-padded to 64 hex chars. Convert the `agentId` from Step 1 (decimal integer) to hex, then left-pad with zeros to 64 characters.
+**ABI encoding:** Call data for Steps 3 and 4 = `0x` + function selector (8 hex chars) + agentId zero-padded to 64 hex chars. Convert the `agentId` from Step 1 (decimal integer) to hex, then left-pad with zeros to 64 characters.
 
 ### Step 3: Read Agent Wallet (eth_call)
 
@@ -325,12 +330,12 @@ owner_lower   = <NFT owner from Step 4>.toLowerCase()
 verified = (signer_lower == wallet_lower) OR (signer_lower == owner_lower)
 ```
 
-- `signer_lower`: recovered signer from `personal_ecRecover`, lowercased
+- `signer_lower`: recovered signer from Step 2, lowercased
 - `wallet_lower`: agent wallet from `getAgentWallet`, lowercased
 - `owner_lower`: NFT owner from `ownerOf`, lowercased
 - `verified`: true if either comparison matches — both addresses are authorized signers for the agent
 
-`personal_ecRecover` returns EIP-55 checksummed (mixed-case) addresses; `eth_call` results are lowercase hex. Lowercasing both sides ensures consistent comparison.
+All three results are `eth_call` responses in lowercase hex. Lowercasing ensures consistent comparison regardless of any mixed-case formatting.
 
 ## Error Conditions
 
