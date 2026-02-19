@@ -7,9 +7,9 @@
 
 ### Skill Document Structure
 
-- [ ] **SKILL-01**: Skill doc opens with explicit capability declaration stating what it teaches, who it's for, and assumed tools (web fetch only)
-- [ ] **SKILL-02**: Consistent H2/H3 heading structure so agents can programmatically navigate sections
-- [ ] **SKILL-03**: Explicit scope statement — what the doc does NOT cover (keccak256, registry deployment, wallet management)
+- [x] **SKILL-01**: Skill doc opens with explicit capability declaration stating what it teaches, who it's for, and assumed tools (web fetch only)
+- [x] **SKILL-02**: Consistent H2/H3 heading structure so agents can programmatically navigate sections
+- [x] **SKILL-03**: Explicit scope statement — what the doc does NOT cover (keccak256, registry deployment, wallet management)
 
 ### Signed Block Format
 
@@ -81,9 +81,9 @@
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| SKILL-01 | Phase 1 | Pending |
-| SKILL-02 | Phase 1 | Pending |
-| SKILL-03 | Phase 1 | Pending |
+| SKILL-01 | Phase 1 | Complete |
+| SKILL-02 | Phase 1 | Complete |
+| SKILL-03 | Phase 1 | Complete |
 | FMT-01 | Phase 1 | Pending |
 | FMT-02 | Phase 1 | Pending |
 | FMT-03 | Phase 1 | Pending |
