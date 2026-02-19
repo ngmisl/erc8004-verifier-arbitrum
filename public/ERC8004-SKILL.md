@@ -196,7 +196,122 @@ Call `personal_ecRecover` to recover the address that produced the signature. Pa
 
 The `result` field is the recovered signer address. Save this for comparison in the Result step.
 
-<!-- Phase 2 continued -->
+**ABI encoding:** Call data = `0x` + function selector (8 hex chars) + agentId zero-padded to 64 hex chars. Convert the `agentId` from Step 1 (decimal integer) to hex, then left-pad with zeros to 64 characters.
+
+### Step 3: Read Agent Wallet (eth_call)
+
+Call `eth_call` to read the agent's wallet address from the registry contract. The `getAgentWallet(uint256)` selector is `0x00339509`.
+
+**Template:**
+
+```json
+{
+  "jsonrpc": "2.0",
+  "id": 2,
+  "method": "eth_call",
+  "params": [
+    {
+      "to": "<registryAddress from Step 1>",
+      "data": "0x00339509<agentId zero-padded to 64 hex chars>"
+    },
+    "latest"
+  ]
+}
+```
+
+**Worked example** (agentId=5, registry from Step 1):
+
+```json
+{
+  "jsonrpc": "2.0",
+  "id": 2,
+  "method": "eth_call",
+  "params": [
+    {
+      "to": "0x8004b3A873394d8B0Af8fD5D9C5D5a432",
+      "data": "0x003395090000000000000000000000000000000000000000000000000000000000000005"
+    },
+    "latest"
+  ]
+}
+```
+
+**Response:**
+
+```json
+{
+  "jsonrpc": "2.0",
+  "id": 2,
+  "result": "0x000000000000000000000000d8da6bf26964af9d7eed9e03e53415d37aa96045"
+}
+```
+
+> These values are synthetic. Do not use for on-chain verification.
+
+The `result` field contains the agent wallet address. Save this for comparison in the Result step.
+
+### Step 4: Read NFT Owner (eth_call)
+
+Call `eth_call` to read the NFT owner address from the registry contract. The `ownerOf(uint256)` selector is `0x6352211e`.
+
+**Template:**
+
+```json
+{
+  "jsonrpc": "2.0",
+  "id": 3,
+  "method": "eth_call",
+  "params": [
+    {
+      "to": "<registryAddress from Step 1>",
+      "data": "0x6352211e<agentId zero-padded to 64 hex chars>"
+    },
+    "latest"
+  ]
+}
+```
+
+**Worked example** (agentId=5, registry from Step 1):
+
+```json
+{
+  "jsonrpc": "2.0",
+  "id": 3,
+  "method": "eth_call",
+  "params": [
+    {
+      "to": "0x8004b3A873394d8B0Af8fD5D9C5D5a432",
+      "data": "0x6352211e0000000000000000000000000000000000000000000000000000000000000005"
+    },
+    "latest"
+  ]
+}
+```
+
+**Response:**
+
+```json
+{
+  "jsonrpc": "2.0",
+  "id": 3,
+  "result": "0x000000000000000000000000e41d2489571d322189246dafa5ebde1f4699f498"
+}
+```
+
+> These values are synthetic. Do not use for on-chain verification.
+
+The `result` field contains the NFT owner address. Save this for comparison in the Result step.
+
+### RPC Endpoints
+
+Select the RPC endpoint based on the `chainId` from Step 1.
+
+| Chain ID | Network | RPC Endpoint |
+|----------|---------|-------------|
+| 42161 | Arbitrum One | `https://arb1.arbitrum.io/rpc` |
+| 421614 | Arbitrum Sepolia | `https://sepolia-rollup.arbitrum.io/rpc` |
+
+> This table duplicates the Supported Chains table in Agent Identity — that is intentional. Agents reading this procedure should not need to scroll back.
 
 ## Result
 
