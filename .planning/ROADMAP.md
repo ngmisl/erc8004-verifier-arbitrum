@@ -12,7 +12,7 @@ Replace `public/ai.html` with `ERC8004-SKILL.md` — a machine-readable markdown
 
 Decimal phases appear between their surrounding integers in numeric order.
 
-- [ ] **Phase 1: Skill Doc Foundation** - Capability declaration, signed block format spec, identity format, and signing instructions
+- [x] **Phase 1: Skill Doc Foundation** - Capability declaration, signed block format spec, identity format, and signing instructions (completed 2026-02-19)
 - [ ] **Phase 2: Verification Procedure** - Numbered walkthrough, JSON-RPC call specs, pre-computed selectors, RPC endpoints
 - [ ] **Phase 3: Result Logic and Error Handling** - Pass/fail rule, address normalization, error conditions, trust forwarding
 - [ ] **Phase 4: Build Pipeline** - Wire ERC8004-SKILL.md into build, remove ai.html, add "For Agents" discovery box
@@ -86,7 +86,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Skill Doc Foundation | 0/2 | Not started | - |
+| 1. Skill Doc Foundation | 2/2 | Complete   | 2026-02-19 |
 | 2. Verification Procedure | 0/2 | Not started | - |
 | 3. Result Logic and Error Handling | 0/1 | Not started | - |
 | 4. Build Pipeline | 0/1 | Not started | - |

@@ -13,13 +13,13 @@
 
 ### Signed Block Format
 
-- [ ] **FMT-01**: Complete signed block format spec — exact grammar for separator, every field, required vs optional
-- [ ] **FMT-02**: Full ID format spec — `eip155:<chainId>:<registryAddress>:<agentId>` broken down field by field
-- [ ] **FMT-03**: Annotated real example — complete signed block with comments identifying each line's purpose
+- [x] **FMT-01**: Complete signed block format spec — exact grammar for separator, every field, required vs optional
+- [x] **FMT-02**: Full ID format spec — `eip155:<chainId>:<registryAddress>:<agentId>` broken down field by field
+- [x] **FMT-03**: Annotated real example — complete signed block with comments identifying each line's purpose
 
 ### Signing Instructions
 
-- [ ] **SIGN-01**: Signing instructions preserved from ai.html — tool name, input rules, output format, display rules
+- [x] **SIGN-01**: Signing instructions preserved from ai.html — tool name, input rules, output format, display rules
 
 ### Verification Procedure
 
@@ -84,10 +84,10 @@
 | SKILL-01 | Phase 1 | Complete |
 | SKILL-02 | Phase 1 | Complete |
 | SKILL-03 | Phase 1 | Complete |
-| FMT-01 | Phase 1 | Pending |
-| FMT-02 | Phase 1 | Pending |
-| FMT-03 | Phase 1 | Pending |
-| SIGN-01 | Phase 1 | Pending |
+| FMT-01 | Phase 1 | Complete |
+| FMT-02 | Phase 1 | Complete |
+| FMT-03 | Phase 1 | Complete |
+| SIGN-01 | Phase 1 | Complete |
 | QA-01 | Phase 2 | Pending |
 | QA-02 | Phase 2 | Pending |
 | VFY-01 | Phase 2 | Pending |
