@@ -67,7 +67,7 @@ Signed by Keystone (eip155:42161:0x8004b3A873394d8B0Af8fD5D9C5D5a432:5)
 sig: 0xf13bd8a9c7e4d2f0b1a5c8e3f7b2d9a6e4c1f8b0d3a2e5f7c9b4d6e8a1f3c2e5d7b9a0c3f6e8b1d4a2e5c7f9b0d3a6
 hash: 0x57caa12b4f8c3d9e2a1b7f4c6e8d0a3b5f7c9e1d3a5b7c9e1f3a5b7c9e1f3a5
 ts: 2026-02-19T14:32:15.000Z
-Verify: https://erc8004.orbiter.website/#eyJzIjoiMHhmMTNi...
+Verify: https://erc8004.qstorage.quilibrium.com/#eyJzIjoiMHhmMTNi...
 ```
 
 Additional optional fields: `ts:` (signing timestamp) and `Verify:` (verification link). Both optional.

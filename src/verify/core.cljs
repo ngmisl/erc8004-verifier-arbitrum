@@ -272,7 +272,7 @@
                                           :a (:full-id parsed)}
                                    (:timestamp parsed) (assoc :t (:timestamp parsed))
                                    subj (assoc :d subj))))
-                url (str "https://erc8004.orbiter.website/#"
+                url (str "https://erc8004.qstorage.quilibrium.com/#"
                          (utf8->b64 proof))]
             (-> (.writeText (.-clipboard js/navigator) url)
                 (.then (fn []
