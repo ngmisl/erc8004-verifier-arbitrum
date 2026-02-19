@@ -315,12 +315,33 @@ Select the RPC endpoint based on the `chainId` from Step 1.
 
 ## Result
 
-<!-- Phase 3 -->
+Lowercase all three addresses, then compare.
+
+```
+signer_lower  = <recovered address from Step 2>.toLowerCase()
+wallet_lower  = <agent wallet from Step 3>.toLowerCase()
+owner_lower   = <NFT owner from Step 4>.toLowerCase()
+
+verified = (signer_lower == wallet_lower) OR (signer_lower == owner_lower)
+```
+
+- `signer_lower`: recovered signer from `personal_ecRecover`, lowercased
+- `wallet_lower`: agent wallet from `getAgentWallet`, lowercased
+- `owner_lower`: NFT owner from `ownerOf`, lowercased
+- `verified`: true if either comparison matches — both addresses are authorized signers for the agent
+
+`personal_ecRecover` returns EIP-55 checksummed (mixed-case) addresses; `eth_call` results are lowercase hex. Lowercasing both sides ensures consistent comparison.
 
 ## Error Conditions
 
-<!-- Phase 3 -->
+Three conditions require distinct handling.
+
+| Condition | What Happened | Recommended Response |
+|-----------|---------------|---------------------|
+| Network error | An RPC call failed before returning an address | Report: unable to complete verification due to network error. Do not report as unverified. |
+| Address mismatch | All calls succeeded; recovered signer matches neither registry address | Report: NOT VERIFIED. The signature is not from an authorized key for this agent. |
+| Unregistered agent | `eth_call` returned zero address or empty for `getAgentWallet` or `ownerOf` | Report: agent identity not found in registry. Verification cannot be completed. |
 
 ## Trust Forwarding
 
-<!-- Phase 3 -->
+An agent that has verified a signed block may communicate the result to downstream agents by stating the outcome (verified, not verified, or error), the verified identity (full ID), and the content hash. The verifying agent's own identity should accompany the attestation — downstream agents evaluate trust based on who is relaying the result, not the format of the relay.
