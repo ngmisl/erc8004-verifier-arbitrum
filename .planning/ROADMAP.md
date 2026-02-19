@@ -60,10 +60,10 @@ Plans:
   2. An agent knows verification passes if the recovered signer matches EITHER getAgentWallet OR ownerOf (the OR condition is explicit, not implied)
   3. An agent encountering a network error, address mismatch, or unregistered agent knows the recommended response for each case without having to decide
   4. An agent understands conceptually how to relay a verification result to downstream agents without being constrained to a prescribed format
-**Plans**: TBD
+**Plans**: 1 plan
 
 Plans:
-- [ ] 03-01: Write address comparison rule (VFY-07), pass/fail definition (VFY-08), error conditions (VFY-10), and trust forwarding guidance (TRUST-01)
+- [ ] 03-01-PLAN.md -- Write Result section (address comparison rule, pass/fail definition), Error Conditions table, and Trust Forwarding guidance
 
 ### Phase 4: Build Pipeline
 **Goal**: ERC8004-SKILL.md is served at the canonical URL, discoverable from index.html, ai.html is removed, and the build pipeline copies the skill doc correctly
